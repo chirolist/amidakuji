@@ -1,0 +1,420 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 28px 16px calc(28px + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(900px 420px at 50% -8%, #fffaf3 0%, rgba(255, 250, 243, 0) 70%),
+    #f3eee6;
+}
+
+.frame {
+  width: min(100%, 420px);
+  user-select: none;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(32px, 9vw, 40px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #2b2724;
+}
+
+.status {
+  min-height: 1.5em;
+  margin: 8px 0 12px;
+  color: #8a8178;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.boardWrap {
+  background: #fffdf9;
+  border-radius: 28px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 18px 40px rgba(70, 48, 24, 0.08);
+  padding: 6px 6px 10px;
+}
+
+.board {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  touch-action: manipulation;
+  font-family: inherit;
+}
+
+.hint {
+  fill: #b7aea4;
+  font-size: 15px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.line {
+  fill: none;
+  stroke: #2c2825;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.trail {
+  fill: none;
+  stroke: #f47a1f;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.start {
+  transition: opacity 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.start:focus {
+  outline: none;
+}
+
+.dimmed {
+  opacity: 0.38;
+}
+
+.startLabel,
+.startLabelActive {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
+}
+
+.startLabel {
+  fill: #5f584f;
+}
+
+.startLabelActive {
+  fill: #e25e00;
+}
+
+.dot {
+  fill: #2c2825;
+}
+
+.dotSelected {
+  fill: #f47a1f;
+}
+
+.idleDot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: idlePulse 1.7s ease-in-out infinite;
+}
+
+.halo {
+  fill: rgba(244, 122, 31, 0.18);
+}
+
+.focusRing {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 3;
+}
+
+.start:focus-visible .focusRing {
+  stroke: #f47a1f;
+}
+
+.hit {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.dimmed .hit {
+  cursor: default;
+}
+
+.goalBox {
+  fill: #fff;
+  stroke: #e6ddd2;
+  stroke-width: 2.5;
+}
+
+.goalWin {
+  fill: #fff4ea;
+  stroke: #f47a1f;
+  stroke-width: 3.5;
+}
+
+.goalText,
+.goalTextWin {
+  font-size: 26px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.goalText {
+  fill: #2b2724;
+}
+
+.goalTextWin {
+  fill: #e25e00;
+}
+
+.goalHot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: goalPop 0.5s cubic-bezier(0.2, 0.85, 0.2, 1);
+}
+
+.spark {
+  fill: #f47a1f;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spark 0.7s ease-out forwards;
+}
+
+.markerGlow {
+  fill: rgba(255, 138, 31, 0.38);
+}
+
+.markerCore {
+  fill: #ff8a1f;
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.markerHot {
+  fill: #fff7ef;
+}
+
+.markerPop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: markerPop 0.42s cubic-bezier(0.2, 0.85, 0.2, 1) forwards;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(48, 36, 26, 0.22);
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.piece {
+  position: absolute;
+  top: -8%;
+  border-radius: 2px;
+  opacity: 0;
+  animation-name: fall;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.card {
+  position: relative;
+  width: min(100%, 340px);
+  padding: 26px 22px 20px;
+  border-radius: 28px;
+  background: #fffdfb;
+  box-shadow: 0 22px 50px rgba(50, 30, 10, 0.18);
+  text-align: center;
+  animation: cardIn 0.42s cubic-bezier(0.2, 0.85, 0.2, 1);
+}
+
+.emoji {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.kicker {
+  margin: 8px 0 0;
+  color: #8a8178;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.prize {
+  margin: 4px 0 0;
+  color: #f47a1f;
+  font-size: clamp(44px, 12vw, 56px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  animation: prizeIn 0.48s cubic-bezier(0.2, 0.85, 0.2, 1);
+}
+
+.congrats {
+  margin: 8px 0 0;
+  color: #5c554e;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.replay {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 22px;
+  border: 0;
+  border-radius: 999px;
+  background: #f47a1f;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.replay:hover {
+  background: #e56d12;
+}
+
+.replay:active {
+  transform: scale(0.98);
+}
+
+.replay:focus-visible {
+  outline: 3px solid #ffd3b0;
+  outline-offset: 3px;
+}
+
+@keyframes idlePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes goalPop {
+  0% {
+    transform: scale(0.94);
+  }
+  55% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spark {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+@keyframes markerPop {
+  0% {
+    transform: scale(1);
+  }
+  55% {
+    transform: scale(1.42);
+  }
+  100% {
+    transform: scale(1.24);
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes prizeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fall {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0.15;
+    transform: translate3d(var(--drift), 108vh, 0) rotate(var(--spin));
+  }
+}
+
+@media (min-height: 920px) {
+  .page {
+    align-items: center;
+  }
+}
+
+@media (max-height: 740px) {
+  .page {
+    padding-top: 14px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .status {
+    margin-bottom: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .idleDot,
+  .goalHot,
+  .spark,
+  .markerPop,
+  .card,
+  .prize,
+  .piece {
+    animation: none;
+  }
+
+  .piece {
+    opacity: 0;
+  }
+}

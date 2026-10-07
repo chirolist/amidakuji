@@ -1,0 +1,4 @@
+echo "コミット前チェック: lint"
+npm run lint
+echo "コミット前チェック: build"
+npm run build
